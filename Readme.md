@@ -1,3 +1,3 @@
 # YikYak-Clone
 
-A web-based application similar to YikYak that I made.
+Web based YikYak clone, but better??
