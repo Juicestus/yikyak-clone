@@ -31,5 +31,6 @@ if __name__ == '__main__':
         'run-server': 'cd server; ./app',
         'deploy-server': 'cd server; yes | gcloud app deploy; gcloud app browse',
         'browse-server': 'cd server; gcloud app browse',
+        'clean-server': 'cd server; rm -rf public; rm -rf app',
         'build-client': 'rm -r server/public; cd client; yarn build; cp -r build ../server/public',
     })
