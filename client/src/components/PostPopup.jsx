@@ -1,4 +1,10 @@
 import React, { Component } from "react";
+import axios from "axios";
+
+const endpoint = () => window.location.hostname;
+
+// this will be stored in a cookie given durring auth
+const DEMO_USER_CODE = "b14ec87f9690454035f81493666d57fd"; // randomly generated hex
 
 class PostPopup extends Component {
   state = { seen: false, message: "" };
@@ -8,11 +14,26 @@ class PostPopup extends Component {
   createPost = (e) => {
     e.preventDefault();
     
-    // Post the message!
-    console.log(this.state.message);
+    if (!this.state.message.replace(/\s/g, '').length) {
+      alert("Please enter a valid message.");
+      return;
+    }
+
+    axios.post('/api/post_message', {
+      message: this.state.message,
+      usercode: DEMO_USER_CODE 
+    }, {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      }
+    }).then(res => {
+      this.exit();
+      console.log(res);
+    }).catch(err => {
+      console.log(err);
+    });
 
     // Todo: charater count
-    this.exit();
   };
 
   render() {
